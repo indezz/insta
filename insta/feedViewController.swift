@@ -30,11 +30,13 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let query = PFQuery(className:"Post")
         query.includeKey("author")
         query.limit = 20
+        query.order(byDescending: "createdAt")
         
         query.findObjectsInBackground() { (posts, error) in
             if posts != nil {
                 self.posts = posts!
                 self.tableView.reloadData()
+                
             }
         }
     }
@@ -54,7 +56,6 @@ class feedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let imageFile = post["image"] as! PFFileObject
         let urlString = imageFile.url!
         let url = URL(string: urlString)!
-        print(url)
         cell.postedImage.af_setImage(withURL: url)
         
         return  cell

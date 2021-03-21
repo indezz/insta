@@ -47,8 +47,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             picker.sourceType = .camera
         } else {
-            present(picker, animated: true, completion: nil)
+            picker.sourceType = .photoLibrary
         }
+        
+        present(picker, animated: true, completion: nil)
+
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
